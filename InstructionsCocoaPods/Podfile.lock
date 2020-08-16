@@ -1,0 +1,22 @@
+PODS:
+  - Instructions (2.0.0)
+
+DEPENDENCIES:
+  - Instructions (from `https://github.com/ephread/Instructions.git`, branch `main`)
+
+EXTERNAL SOURCES:
+  Instructions:
+    :branch: main
+    :git: https://github.com/ephread/Instructions.git
+
+CHECKOUT OPTIONS:
+  Instructions:
+    :commit: a653ea24fae9b4734a2829c94b7af2ec4b368ce2
+    :git: https://github.com/ephread/Instructions.git
+
+SPEC CHECKSUMS:
+  Instructions: debf9cedeaf8d095108fd35d2c54b97ccf769e65
+
+PODFILE CHECKSUM: f785b0cc1e3da43a9551be8347d5f4b224db5f1e
+
+COCOAPODS: 1.9.3
