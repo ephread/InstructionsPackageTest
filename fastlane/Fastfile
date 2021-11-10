@@ -1,0 +1,75 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Test all"
+  lane :test_all do
+    test_swiftpm
+    test_carthage
+    test_cocoapods
+  end
+
+  desc "Test Swift Package Manager"
+  lane :test_swiftpm do
+    test_scheme(
+      workspace: "InstructionsPackageTest.xcworkspace",
+      scheme: "InstructionsSwiftPM"
+    )
+  end
+
+  desc "Test Carthage"
+  lane :test_carthage do
+    carthage(
+      project_directory: "InstructionsCarthage",
+      command: "update",
+      use_xcframeworks: "true"
+    )
+
+    test_scheme(
+      workspace: "InstructionsPackageTest.xcworkspace",
+      scheme: "InstructionsCarthage"
+    )
+  end
+
+  desc "Test CocoaPods"
+  lane :test_cocoapods do
+    cocoapods(
+      podfile: "InstructionsCocoaPods/Podfile"
+    )
+
+    test_scheme(
+      workspace: "InstructionsCocoaPods/InstructionsCocoaPods.xcworkspace",
+      scheme: "InstructionsCocoaPods"
+    )
+  end
+
+  desc "Test given workspace & scheme"
+  lane :test_scheme do |values|
+    build_app(
+      workspace: values[:workspace],
+      scheme: values[:scheme],
+      clean: true,
+      skip_archive: true,
+      skip_codesigning: true
+    )
+
+    run_tests(
+      workspace: values[:workspace],
+      scheme: values[:scheme],
+    )
+  end
+end
