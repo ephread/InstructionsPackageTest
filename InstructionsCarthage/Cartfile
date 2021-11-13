@@ -1,3 +1,1 @@
-# github "ephread/Instructions" "github-actions"
-
-git "file:///Users/Fred/Documents/Development/iOS/Instructions" "github-actions"
+github "ephread/Instructions" "github-actions"
