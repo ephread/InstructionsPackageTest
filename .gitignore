@@ -44,6 +44,7 @@ Podfile.lock
 Cartfile.resolved
 
 .swiftpm/
+Package.resolved
 
 # fastlane
 #
