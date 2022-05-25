@@ -25,6 +25,8 @@ platform :ios do
 
   desc "Test Swift Package Manager"
   lane :test_swiftpm do
+    remove_package_dot_resolved
+
     test_scheme(
       workspace: "InstructionsPackageTest.xcworkspace",
       scheme: "InstructionsSwiftPM"
@@ -33,6 +35,8 @@ platform :ios do
 
   desc "Test Carthage"
   lane :test_carthage do
+    remove_package_dot_resolved
+
     carthage(
       project_directory: "InstructionsCarthage",
       command: "update",
@@ -47,6 +51,8 @@ platform :ios do
 
   desc "Test CocoaPods"
   lane :test_cocoapods do
+    remove_package_dot_resolved
+
     cocoapods(
       podfile: "InstructionsCocoaPods/Podfile"
     )
@@ -71,5 +77,19 @@ platform :ios do
       workspace: values[:workspace],
       scheme: values[:scheme],
     )
+  end
+
+  desc "Remove Package.resolved"
+  lane :remove_package_dot_resolved do
+    package_resolved_path = File.join(
+      "..", "InstructionsPackageTest.xcworkspace", "xcshareddata", "swiftpm", "Package.resolved"
+    )
+
+    if File.exist?(package_resolved_path)
+      UI.message("'Package.resolved' removed")
+      File.delete(package_resolved_path)
+    else
+      UI.message("'Package.resolved' not found, nothing to remove.")
+    end
   end
 end

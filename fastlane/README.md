@@ -55,6 +55,14 @@ Test CocoaPods
 
 Test given workspace & scheme
 
+### ios remove_package_dot_resolved
+
+```sh
+[bundle exec] fastlane ios remove_package_dot_resolved
+```
+
+Remove Package.resolved
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
